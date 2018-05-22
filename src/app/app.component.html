@@ -1,0 +1,59 @@
+<h1>Shopping Cart</h1>
+<div class="row col-10" *ngIf="cart">
+  <h2>
+    My Cart {{cart.length }}
+  </h2>
+  <table class="table">
+    <thead>
+      <!-- <tr> -->
+        
+        <!-- <th class="text-center" style="width: 230px">Quantity</th> -->
+       
+      <!-- </tr> -->
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cart">
+        <td>
+          <div [style.backgroundImage]="'url(' + item.imageUrl + ')'" class="thumbnail">
+          </div>
+        </td>
+        <td>
+          {{ item.title }}
+        </td>
+        <td>
+          <!-- <product-quantity [product]="item" [shopping-cart]="cart">
+          </product-quantity> -->
+          <div class="row no-gutters">
+            <div class="col-2">
+              <button 
+                (click)="removeFromCart(item)"
+                class="btn btn-secondary btn-block">-</button> 
+            </div>
+            <div class="col text-center">
+              {{item.quantity}} in cart
+            </div>
+            <div class="col-2">
+              <button 
+                (click)="addToCart(item.id)"
+                class="btn btn-secondary btn-block">+</button> 
+            </div>
+          </div>
+        </td>
+        <td class="text-right">
+          {{ item.totalPrice | currency:'USD':true }}
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="text-right">{{ cart.totalPrice | currency:'USD':true }}</th>
+      </tr>
+    </tfoot> 
+  </table>
+  <button 
+    (click)="clearCart()"
+    class="btn btn-danger btn-sm">Clear Shopping Cart</button>
+</div>
